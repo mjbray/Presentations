@@ -4,10 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>Evaluating the Accuracy and Efficiency of Complex Network Classification Algorithms</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="description" content="A comparison of five network classification methods.">
+		<meta name="author" content="Margaret Bray, Vicki Stover-Hertzberg">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -30,6 +30,16 @@
 				document.getElementsByTagName( 'head' )[0].appendChild( link );
 			}
 		</script>
+		
+		<style>
+			table, th, td {
+   			border: 1px solid black;
+    		border-collapse: collapse;
+				}
+			th, td {
+    		padding: 15px;
+				}
+		</style>
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -43,64 +53,224 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>HTML Presentations Made Easy</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
+					<h2>Evaluating the Accuracy and Efficiency of Complex Network Classification Algorithms</h2>
+					
+					<br />
+					<p>Margaret Bray, Vicki Stover-Hertzberg</p>
+					<p><small>Department of Biostatistics and Bioinformatics<br />
+								Rollins School of Public Health<br />
+								Emory University</small></p>
+					<p>November 23, 2014</p>
 				</section>
 
 				<section>
-					<h2>Heads Up</h2>
-					<p>
-						reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
-						support for CSS 3D transforms to see it in its full glory.
-					</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
-
-				<!-- Example of nested vertical slides -->
-				<section>
-					<section>
-						<h2>Vertical Slides</h2>
+						<section>
+						<h2>Empirical Networks</h2>
 						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#" class="navigate-down">down</a>.
+							A network formed through observation of any real-world phenomena.
 						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
+	
+						<aside class="notes">
+							Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard). Need to figure out how to activate this.
+						</aside>
+						</section>
+
 					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
+						<h2>Computer Networks</h2>
+						<ul>
+						<li>World Wide Web</li>
+						<li>Internet</li>
+						<li>Routers(?)</li>
+						</ul>
 					</section>
+					
 					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
+						<h2>Social and Public Health Netowkrs</h2>
+						<ul>
+						<li>Friendships</li>
+						<li>Sexual Relationships</li>
+						<li>Twitter Followings</li>
+						</ul>
 					</section>
+					
 					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
+						<h2>Biological and Molecular Networks</h2>
+						<ul>
+						<li>Food web</li>
+						<li>Metabolic</li>
+						<li>Protein-protein interactions</li>
+						<li>Neurological</li>
+						</ul>
 					</section>
 				</section>
 
 				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? No problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slid.es" target="_blank">http://slid.es</a>.
-					</p>
-				</section>
+					<section>
+						<h2>Model Networks</h2>
+						<p class="fragment highlight-current-blue">A network <strong>not</strong> based directly on any real-world system, though potentially motivated by one.</p>
+						<p class="fragment highlight-current-blue">These are built by following a prescribed algorithm, also referred to as a <strong>growth mechanism</strong>.</p>
+						<p class="fragment highlight-current-blue">Model networks are either <strong>growing</strong> or <strong>static</strong>.</p>
+			
+						<aside class="notes">
+							Make sure to explain the difference between growing and static.
+						</aside>
+					</section>
+					
 
+					<section>
+						<h2> Examples of Model Networks</h2>
+						<table style="width:100%">
+							<tr>
+							<td>Aging Vertex</td>
+							<td>AGV</td>
+							<td>Growing</td>
+							</tr>
+							<tr>
+							<td>Duplication-Mutation</td>
+							<td>DMC</td>
+							<td>Growing</td>
+							</tr>
+							<tr>
+							<td>-Complementation</td>
+							</tr>
+							<tr>
+							<td>Duplication-Mutation with</td>
+							<td>DMR</td>
+							<td>Growing</td>
+							</tr>
+							<tr>
+							<td> Random Mutation</td>
+							<tr>
+							<td>3D Geometric</td>
+							<td>GEO</td>
+							<td>Static</td>
+							</tr>
+							<tr>
+							<td>Linear Preferential Attachment</td>
+							<td>LPA</td>
+							<td>Growing</td>
+							</tr>
+							<tr>
+							<td>Random Growing</td>
+							<td>RDG</td>
+							<td>Growing</td>
+							</tr>
+							<tr>
+							<td>Random Static</td>
+							<td>RDS</td>
+							<td>Static</td>
+							</tr>
+							<tr>
+							<td>Small-World</td>
+							<td>SMW</td>
+							<td>Static</td>
+							</tr>
+							<tr>
+							<td>Stickiness Index</td>
+							<td>STICKY</td>
+							<td>Growing</td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				
+				<section>
+					<h2>What does it mean to classify a network?</h2>
+					<p> To determine a growth mechanism whose created networks most closely
+						mimic the empirical model under investigation based upon some set
+						of network features or measures. </p>
+				</section>
+				
+				<section>
+					<h2>Why is network classification beneficial?</h2>
+					<aside class="notes">Having a correct model helps to</aside>
+					<ul>
+􏰀 						<li>Increase understanding of the phenomena being modeled</li>
+􏰀 						<ul><li>Structure dictates functions</li></ul>
+􏰀	 					<li>Guide experiments</li>
+􏰀 						<li>Predict behavior and interactions</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Network Classification Method Overview</h2>
+					<ul>
+					<li>5 classification methods considered</li>
+					<li>2 local properties</li>
+					<ul><li>Relative Graphlet Frequency (RGF)</li>
+					<li>Graphlet Degree Distribution (GDD)</li></ul>
+					<li>2 global properties
+					<ul><li>Characteristic Curve (CC)</li>
+					<li>Degree Distribution Distance (DDD)</li></ul>
+					<li>1 mixture of both local and global properties</li>
+					<ul><li>Cross Scoring (CS)</li></ul>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>DDD Matching Matrix</h2>
+					<img src="DDDconfusionMatrix.png" alt="Graphlets" style="width:600px;height:600px"/>
+				</section>
+				
+				<section>
+					<h2>CCC Matching Matrix</h2>
+					<img src="CCconfusionMatrix.png" alt="Graphlets" style="width:600px;height:600px"/>
+				</section>
+				
+				<section>
+					<h2>RGF Matching Matrix</h2>
+					<img src="RGFconfusionMatrix.png" alt="Graphlets" style="width:600px;height:600px"/>
+				</section>
+				
+				<section>
+					<h2>GDD <small>(Arithmetic Mean)</small> Matching Matrix</h2>
+					<img src="GDDAconfusionMatrix.png" alt="Graphlets" style="width:600px;height:600px"/>
+				</section>
+				
+				<section>
+					<h2>GDD <small>(Geometric Mean)</small> Matching Matrix</h2>
+					<img src="GDDGconfusionMatrix.png" alt="Graphlets" style="width:600px;height:600px"/>
+				</section>
+				
+				
+				<section>
+				<h2>Calculating the Relative Graphlet Frequency</h2>
+				<ol>
+					<li class="fragment">Count the number of times each graphlet appears in the network</li>
+					<li class="fragment">Define distance</li>
+					<ul><li class="fragment">$\mathcal{D}_{\mathcal{RGF}}=\displaystyle\sum\limits_{i=1}^{29}\left|F_{i}(\mathcal{G}_{1})-F_{i}(\mathcal{G}_{2})\right|$</li></ul>
+					</ol>
+				<p class="fragment">where<p>
+				<small><p class="fragment">$F_{i}(\mathcal{G}) = -log(N_{i}(\mathcal{G})/T(\mathcal{G}))$</p>
+				<p class="fragment">$N_{i}$, is the number of graphlets of type $i$ $(i\in \{1,...,29\})$</p>
+				<p class="fragment">$T(\mathcal{G})=\displaystyle\sum\limits_{i=1}^{29}N_{i}(\mathcal{G})$</p></small>
+				
+				</section>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				<section>
 					<h2>Point of View</h2>
 					<p>
@@ -110,6 +280,7 @@
 						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
 					</p>
 				</section>
+
 
 				<section>
 					<h2>Works in Mobile Safari</h2>
@@ -373,19 +544,38 @@ function linkify( selector ) {
 				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
 				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
+				math: {
+    				mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+    				config: 'TeX-AMS_HTML-full' // See http://docs.mathjax.org/en/latest/config-files.html
+  				},
 				// Parallax scrolling
 				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
 				// parallaxBackgroundSize: '2100px 900px',
 
 				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
+				   dependencies: [
+        // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+        { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+        // Interpret Markdown in <section> elements
+        { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+
+        // Syntax highlight for <code> elements
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+        // Zoom in and out with Alt+click
+        { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Speaker notes
+        { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Remote control your reveal.js presentation using a touch device
+        { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // MathJax
+        { src: 'plugin/math/math.js', async: true }
+    ]
 			});
 
 		</script>
