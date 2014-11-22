@@ -12,7 +12,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal=ui">
 
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
@@ -97,7 +97,7 @@
 						<ul>
 						<li>World Wide Web</li><br />
 						<li>Internet</li><br />
-						<li>Routers(?)</li><br />
+						<li>Routers</li><br />
 						</ul>
 					</section>
 					
@@ -398,8 +398,6 @@
 				
 				<section>
 				<h2>Classification Algorithm Validation</h2>
-					<ul>
-						<li style="float:left">100 test networks, 900 comparison networks</li>
 						<img src="rdmGraph1.png" alt="GDDG" style="width:872px;height:432px"/>
 				</section>
 				
@@ -466,12 +464,12 @@
 				<section>
 					<h2>% Correctly Classified</h2>
 					<ul style="float:left">
-						<li>Degree Distribution Distance: <strong style="color:red">45%</strong></li><br />
+						<li>Degree Distribution Distance: <strong style="color:orange">45%</strong></li><br />
 						<li>Characteristic Curve: <strong>58%</strong></li><br />
 						<li>Relative Graphlet Frequency: <strong>57%</strong></li><br />
 						<li>Graphlet Degree Distribution (Arithmetic): <strong>68%</strong></li><br />
 						<li>Graphlet Degree Distribution (Geometric): <strong>60%</strong></li><br />
-						<li>Cross Scoring: <strong style="color:green">81%</strong></li>
+						<li>Cross Scoring: <strong style="color:Chartreuse">81%</strong></li>
 					</ul>
 				</section>
 				
@@ -479,23 +477,23 @@
 					<h2>Method Pros and Cons</h2>
 					<p> <strong>Degree Distribution Distance</strong> </p>
 					<ul style="float:left">
-						<li><strong>Pros:</strong>
+						<li><strong style="color:chartreuse">Pros:</strong>
 							second fastest, no network size limits</li>
-						<li><strong>Cons:</strong>
+						<li><strong style="color:orange">Cons:</strong>
 							worst method validation results, outcomes not normalized</li><br />
 					</ul>
 					
 					<p> <strong>Characteristic Curve</strong> </p>
 					<ul style="float:left">
-						<li><strong>Cons:</strong>
+						<li><strong style="color:orange">Cons:</strong>
 							slow, computationally intensive, outcomes not normalized, requires
 							connected network, results dependent on starting node</li><br />
 					</ul>
 					
 					<p> <strong>Relative Graphlet Frequency</strong> </p>
 					<ul style="float:left">
-						<li><strong>Pros:</strong> medium speed</li>
-						<li><strong>Cons:</strong> upper limit of 50,000 edges, outcomes
+						<li><strong style="color:chartreuse">Pros:</strong> medium speed</li>
+						<li><strong style="color:orange">Cons:</strong> upper limit of 50,000 edges, outcomes
 							not normalized</li>
 					</ul>
 				</section>
@@ -504,17 +502,17 @@
 					<h2>Method Pros and Cons cont.</h2>	
 					<p> <strong>Graphlet Degree Distribution</strong> </p>
 					<ul style="float:left">
-						<li><strong>Pros:</strong> normalized outcomes</li>
-						<li><strong>Cons:</strong> upper limit of 50,000 edges, extremely slow,
+						<li><strong style="color:chartreuse">Pros:</strong> normalized outcomes</li>
+						<li><strong style="color:orange">Cons:</strong> upper limit of 50,000 edges, extremely slow,
 							very computationally intensive
 							</li><br />
 					</ul>
 					
 					<p style="float:center"><strong>Cross Scoring</strong> </p>
 					<ul style="float:left">
-						<li><strong>Pros:</strong> fastest, can be personalized, least
+						<li><strong style="color:chartreuse">Pros:</strong> fastest, can be personalized, least
 							computationally intensive</li>
-						<li><strong>Cons:</strong> poor classification of DMC and DMR networks
+						<li><strong style="color:orange">Cons:</strong> poor classification of DMC and DMR networks
 					</ul>
 				</section>
 				
@@ -525,9 +523,10 @@
 					<li class="fragment">
 						Overall poor classification</li><br />
 					<li class="fragment">
-						GDD and CS most potential</li><br />
+						Lots of potential</li><br />
 					<li class="fragment">
-						Find identifying features of DMC and DMR </li>
+						Difficult time classifying DMC and DMR</li><br />
+						<ul><li class="fragment">Find identifying features </li></ul>
 				</ul>
 				</section>
 				
@@ -610,7 +609,7 @@
         { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
 
         // Remote control your reveal.js presentation using a touch device UNCOMMENT BELOW LINE TO CONTROL WITH MY PHONE
-		{ src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } },
+		//{ src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } },
 
         // MathJax
         { src: 'plugin/math/math.js', async: true }
