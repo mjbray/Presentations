@@ -245,9 +245,9 @@
 				<small><p class="fragment" data-fragment-index="3" style=line-height:2px>where</p></small>
 				<p class="fragment" data-fragment-index="3">
 					$F_{i}(\mathcal{G}) = -log(N_{i}(\mathcal{G})/T(\mathcal{G}))$</p>
-				<p class="fragment" data-fragment-index="4">
+				<p class="fragment" data-fragment-index="3">
 					$N_{i}=$ number of graphlets of type $i$</p>
-				<p class="fragment" data-fragment-index="5">
+				<p class="fragment" data-fragment-index="3">
 					$T(\mathcal{G})=$ total number of graphlets</p>
 				</section>
 				
@@ -267,9 +267,9 @@
 				<small><p class="fragment" data-fragment-index="3" style=line-height:2px>where</p></small>
 				<p class="fragment" data-fragment-index="3">
 					$N_{\mathcal{G}}^{j}(k) = \frac{S_{\mathcal{G}}^{j}(k)}{T_{\mathcal{G}}^{j}}$</p>
-				<p class="fragment" data-fragment-index="4">
+				<p class="fragment" data-fragment-index="3">
 					$S_{\mathcal{G}}^{j}(k)=$ number of nodes with automorphism orbit degree $k$, scaled by $k$</p>
-				<p class="fragment" data-fragment-index="5">
+				<p class="fragment" data-fragment-index="3">
 					$T_{\mathcal{G}}^{j}=$ total number of automorphism orbit $j$</p>
 				</section>
 				
@@ -297,24 +297,18 @@
 					</figure>
 				</section>
 				
-				<section>
+				<!--<section>
 				<h2>Characteristic Curve cont.</h2>
 					<ol style="float:left">
-						<li class="fragment" data-fragment-index="1">Create the characteristic curves.</li>
+						<li class="fragment" data-fragment-index="1">Create the characteristic curves</li>
 						<li class="fragment" data-fragment-index="2">Define distance:</li>
 					</ol>	
 				
 					<p class="fragment" data-fragment-index="2">
 						$\mathcal{D_{CC}(G}_{1},\mathcal{G}_{2})=\displaystyle\sum\limits_{X = s_{i}}^{\max\left(\bar{k_{1}},\bar{k_{2}}\right)}\left|\mathcal{CC}_{1}(X)-\mathcal{CC}_{2}(X)\right|\frac{1}{2\cdot \max\left(n_{1},n_{2}\right) }$
 						$\mathcal{CC}_{i}(X) = \left\lbrace \array{ Y/\bar{k}_{i}, & 0\le X \le T_{end,i}\cr
-							X/\bar{k}_{i}, & T_{end,i} \lt X \le \bar{k}_{i}} \right. $ </p> <br />
-						
-						<!--><small><p class="fragment" data-fragment-index="3" style=line-height:2px>where</p></small>
-						<p class="fragment" data-fragment-index="3">
-						$s_{i} \in \mathcal{S}$ where $\mathcal{S}$ represents the ordered set of X values of the larger network</p>
-						<p class="fragment" data-fragment-index="4">
-						$T_{end,i}$: proportion of nodes in the giant component of network $i$</p>-->
-				</section>
+							X/\bar{k}_{i}, & T_{end,i} \lt X \le \bar{k}_{i}} \right. $ </p>
+				</section>-->
 				
 				
 				<section>
@@ -330,11 +324,11 @@
 				<small><p class="fragment" data-fragment-index="3" style=line-height:2px>where</p></small>
 				<p class="fragment" data-fragment-index="3">
 					$F_{k}(\mathcal{G}) = -log(N_{k}(\mathcal{G})/S(\mathcal{G}))$</p>
-				<p class="fragment" data-fragment-index="4">
+				<p class="fragment" data-fragment-index="3">
 					$S(\mathcal{G})=$ total number of nodes</p>
-				<p class="fragment" data-fragment-index="5">
+				<p class="fragment" data-fragment-index="3">
 					$N_{k}(\mathcal{G})=$ number of nodes with degree $k$</p>
-				<p class="fragment" data-fragment-index="6">
+				<p class="fragment" data-fragment-index="4">
 					$k_{1}$ ($k_{2}$) = min (max) degree of networks</p>
 				</section>
 				
@@ -355,7 +349,7 @@
 						Calculate measure value for empirical network</li>
 						<ul><li class="fragment" data-fragment-index="4" style="font-size: 0.75em"> median density = 0.0035</li></ul>
 					<li class="fragment" data-fragment-index="5">
-						Rank and score networks based on measure value distance from empirical value</li>
+						Rank and score networks based distance from empirical value</li>
 						<ul>	<li class="fragment" data-fragment-index="5" style="font-size: 0.75em"> DMC $=1$, DMR $=2$, AGV $=3$</li></ul>
 					<li class="fragment" data-fragment-index="6">
 						Repeat steps 3 - 5 for all network measure and combine scores</li>
@@ -622,5 +616,3 @@
 
 	</body>
 </html>
-
-
