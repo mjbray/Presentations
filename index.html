@@ -115,7 +115,7 @@
 						<ul>
 						<li>Food web</li><br />
 						<li>Metabolic</li><br />
-						<li>Protein-protein interactions</li><br />
+						<li><strong style="color:Cyan">Protein-protein interactions</strong></li><br />
 						<li>Neurological</li><br />
 						</ul>
 					</section>
@@ -125,13 +125,13 @@
 					<section>
 						<h1>Model Networks</h1><br />
 						<p style="font-size: 1.25em" class="fragment" data-fragment-index="0">
-							A network <strong style="color:Chartreuse">not</strong> based directly on any real-world system,
+							A network <strong style="color:Cyan">not</strong> based directly on any real-world system,
 							though potentially motivated by one.</p><br />
 						<p style="font-size: 1.25em" class="fragment" data-fragment-index="1">
 							These are built by following a prescribed algorithm, also referred to
-							as a <strong style="color:Chartreuse">growth mechanism</strong>.</p><br />
+							as a <strong style="color:Cyan">growth mechanism</strong>.</p><br />
 						<p style="font-size: 1.25em" class="fragment" data-fragment-index="2">
-							Model networks are either <strong style="color:Chartreuse">growing</strong> or <strong style="color:Chartreuse">static</strong>.</p>
+							Model networks are either <strong style="color:Cyan">growing</strong> or <strong style="color:Cyan">static</strong>.</p>
 						
 						<aside class="notes">
 							Make sure to explain the difference between growing and static.
@@ -224,7 +224,7 @@
 				
 				
 				<section>
-					<h1>Graphlets</h1>
+					<h2>Graphlets and Automorphism Orbits</h2>
 					<figure>
 						<img src="graphlets_automorphism.png" alt="DDD" style="width:841px;height:488px"/>
 						<figcaption style="font-size: 0.5em"><i>"Biological network comparison using graphlet degree distribution."</i> Natasa Przulj, <i>Bioinformatics</i>, 23(2):e177–83, Jan 2007., Fig. 1</figcaption>
@@ -245,9 +245,9 @@
 				<small><p class="fragment" data-fragment-index="3" style=line-height:2px>where</p></small>
 				<p class="fragment" data-fragment-index="3">
 					$F_{i}(\mathcal{G}) = -log(N_{i}(\mathcal{G})/T(\mathcal{G}))$</p>
-				<p class="fragment" data-fragment-index="4">
+				<p class="fragment" data-fragment-index="3">
 					$N_{i}=$ number of graphlets of type $i$</p>
-				<p class="fragment" data-fragment-index="5">
+				<p class="fragment" data-fragment-index="3">
 					$T(\mathcal{G})=$ total number of graphlets</p>
 				</section>
 				
@@ -267,9 +267,9 @@
 				<small><p class="fragment" data-fragment-index="3" style=line-height:2px>where</p></small>
 				<p class="fragment" data-fragment-index="3">
 					$N_{\mathcal{G}}^{j}(k) = \frac{S_{\mathcal{G}}^{j}(k)}{T_{\mathcal{G}}^{j}}$</p>
-				<p class="fragment" data-fragment-index="4">
+				<p class="fragment" data-fragment-index="3">
 					$S_{\mathcal{G}}^{j}(k)=$ number of nodes with automorphism orbit degree $k$, scaled by $k$</p>
-				<p class="fragment" data-fragment-index="5">
+				<p class="fragment" data-fragment-index="3">
 					$T_{\mathcal{G}}^{j}=$ total number of automorphism orbit $j$</p>
 				</section>
 				
@@ -297,24 +297,18 @@
 					</figure>
 				</section>
 				
-				<section>
+				<!--<section>
 				<h2>Characteristic Curve cont.</h2>
 					<ol style="float:left">
-						<li class="fragment" data-fragment-index="1">Create the characteristic curves.</li>
+						<li class="fragment" data-fragment-index="1">Create the characteristic curves</li>
 						<li class="fragment" data-fragment-index="2">Define distance:</li>
 					</ol>	
 				
 					<p class="fragment" data-fragment-index="2">
 						$\mathcal{D_{CC}(G}_{1},\mathcal{G}_{2})=\displaystyle\sum\limits_{X = s_{i}}^{\max\left(\bar{k_{1}},\bar{k_{2}}\right)}\left|\mathcal{CC}_{1}(X)-\mathcal{CC}_{2}(X)\right|\frac{1}{2\cdot \max\left(n_{1},n_{2}\right) }$
 						$\mathcal{CC}_{i}(X) = \left\lbrace \array{ Y/\bar{k}_{i}, & 0\le X \le T_{end,i}\cr
-							X/\bar{k}_{i}, & T_{end,i} \lt X \le \bar{k}_{i}} \right. $ </p> <br />
-						
-						<small><p class="fragment" data-fragment-index="3" style=line-height:2px>where</p></small>
-						<p class="fragment" data-fragment-index="3">
-						$s_{i} \in \mathcal{S}$ where $\mathcal{S}$ represents the ordered set of X values of the larger network</p>
-						<p class="fragment" data-fragment-index="4">
-						$T_{end,i}$: proportion of nodes in the giant component of network $i$</p>
-				</section>
+							X/\bar{k}_{i}, & T_{end,i} \lt X \le \bar{k}_{i}} \right. $ </p>
+				</section>-->
 				
 				
 				<section>
@@ -330,12 +324,12 @@
 				<small><p class="fragment" data-fragment-index="3" style=line-height:2px>where</p></small>
 				<p class="fragment" data-fragment-index="3">
 					$F_{k}(\mathcal{G}) = -log(N_{k}(\mathcal{G})/S(\mathcal{G}))$</p>
+				<p class="fragment" data-fragment-index="3">
+					$S(\mathcal{G})=$ total number of nodes</p>
+				<p class="fragment" data-fragment-index="3">
+					$N_{k}(\mathcal{G})=$ number of nodes with degree $k$</p>
 				<p class="fragment" data-fragment-index="4">
 					$k_{1}$ ($k_{2}$) = min (max) degree of networks</p>
-				<p class="fragment" data-fragment-index="5">
-					$N_{k}(\mathcal{G})=$ number of nodes with degree $k$</p>
-				<p class="fragment" data-fragment-index="6">
-					$S(\mathcal{G})=$ total number of nodes</p>
 				</section>
 				
 				
@@ -350,12 +344,12 @@
 						<ul><li class="fragment" data-fragment-index="2" style="font-size: 0.75em"> e.g. AGV, DMC, DMR</li></ul>
 					<li class="fragment" data-fragment-index="3">
 						Calculate measure median value for each type of model network</li>
-						<ul><li class="fragment" data-fragment-index="3" style="font-size: 0.75em">density: AGV $=0.0017$, DMC $=0.039$, DMR $=0.004$</ul>
+						<ul><li class="fragment" data-fragment-index="3" style="font-size: 0.75em">density: AGV $=0.0017$, DMC $=0.0039$, DMR $=0.004$</ul>
 					<li class="fragment" data-fragment-index="4">
 						Calculate measure value for empirical network</li>
 						<ul><li class="fragment" data-fragment-index="4" style="font-size: 0.75em"> median density = 0.0035</li></ul>
 					<li class="fragment" data-fragment-index="5">
-						Rank and score networks based on measure value distance from empirical value</li>
+						Rank and score networks based distance from empirical value</li>
 						<ul>	<li class="fragment" data-fragment-index="5" style="font-size: 0.75em"> DMC $=1$, DMR $=2$, AGV $=3$</li></ul>
 					<li class="fragment" data-fragment-index="6">
 						Repeat steps 3 - 5 for all network measure and combine scores</li>
@@ -462,58 +456,60 @@
 				</section>
 				
 				<section>
-					<h2>% Correctly Classified</h2>
-					<ul style="float:left">
-						<li>Degree Distribution Distance: <strong style="color:orange">45%</strong></li><br />
-						<li>Characteristic Curve: <strong>58%</strong></li><br />
-						<li>Relative Graphlet Frequency: <strong>57%</strong></li><br />
-						<li>Graphlet Degree Distribution (Arithmetic): <strong>68%</strong></li><br />
-						<li>Graphlet Degree Distribution (Geometric): <strong>60%</strong></li><br />
-						<li>Cross Scoring: <strong style="color:Chartreuse">81%</strong></li>
-					</ul>
-				</section>
+					<section>
+						<h2>% Correctly Classified</h2>
+						<ul style="float:left">
+							<li>Degree Distribution Distance: <strong style="color:orange">45%</strong></li><br />
+							<li>Characteristic Curve: <strong>58%</strong></li><br />
+							<li>Relative Graphlet Frequency: <strong>57%</strong></li><br />
+							<li>Graphlet Degree Distribution (Arithmetic): <strong>68%</strong></li><br />
+							<li>Graphlet Degree Distribution (Geometric): <strong>60%</strong></li><br />
+							<li>Cross Scoring: <strong style="color:Chartreuse">81%</strong></li>
+						</ul>
+					</section>
 				
-				<section>
-					<h2>Method Pros and Cons</h2>
-					<p> <strong>Degree Distribution Distance</strong> </p>
-					<ul style="float:left">
-						<li><strong style="color:chartreuse">Pros:</strong>
-							second fastest, no network size limits</li>
-						<li><strong style="color:orange">Cons:</strong>
-							worst method validation results, outcomes not normalized</li><br />
-					</ul>
+					<section>
+						<h2>Method Pros and Cons</h2>
+						<p> <strong>Degree Distribution Distance</strong> </p>
+						<ul style="float:left">
+							<li><strong style="color:chartreuse">Pros:</strong>
+								second fastest, no network size limits</li>
+							<li><strong style="color:orange">Cons:</strong>
+								worst method validation results, outcomes not normalized</li><br />
+						</ul>
 					
-					<p> <strong>Characteristic Curve</strong> </p>
-					<ul style="float:left">
-						<li><strong style="color:orange">Cons:</strong>
-							slow, computationally intensive, outcomes not normalized, requires
-							connected network, results dependent on starting node</li><br />
-					</ul>
+						<p> <strong>Characteristic Curve</strong> </p>
+						<ul style="float:left">
+							<li><strong style="color:orange">Cons:</strong>
+								slow, computationally intensive, outcomes not normalized, requires
+								connected network, results dependent on starting node</li><br />
+						</ul>
 					
-					<p> <strong>Relative Graphlet Frequency</strong> </p>
-					<ul style="float:left">
-						<li><strong style="color:chartreuse">Pros:</strong> medium speed</li>
-						<li><strong style="color:orange">Cons:</strong> upper limit of 50,000 edges, outcomes
-							not normalized</li>
-					</ul>
-				</section>
+						<p> <strong>Relative Graphlet Frequency</strong> </p>
+						<ul style="float:left">
+							<li><strong style="color:chartreuse">Pros:</strong> medium speed</li>
+							<li><strong style="color:orange">Cons:</strong> upper limit of 50,000 edges, outcomes
+								not normalized</li>
+						</ul>
+					</section>
 				
-				<section>
-					<h2>Method Pros and Cons cont.</h2>	
-					<p> <strong>Graphlet Degree Distribution</strong> </p>
-					<ul style="float:left">
-						<li><strong style="color:chartreuse">Pros:</strong> normalized outcomes</li>
-						<li><strong style="color:orange">Cons:</strong> upper limit of 50,000 edges, extremely slow,
-							very computationally intensive
-							</li><br />
-					</ul>
+					<section>
+						<h2>Method Pros and Cons cont.</h2>	
+						<p> <strong>Graphlet Degree Distribution</strong> </p>
+						<ul style="float:left">
+							<li><strong style="color:chartreuse">Pros:</strong> normalized outcomes</li>
+							<li><strong style="color:orange">Cons:</strong> upper limit of 50,000 edges, extremely slow,
+								very computationally intensive
+								</li><br />
+						</ul>
 					
-					<p style="float:center"><strong>Cross Scoring</strong> </p>
-					<ul style="float:left">
-						<li><strong style="color:chartreuse">Pros:</strong> fastest, can be personalized, least
-							computationally intensive</li>
-						<li><strong style="color:orange">Cons:</strong> poor classification of DMC and DMR networks
-					</ul>
+						<p style="float:center"><strong>Cross Scoring</strong> </p>
+						<ul style="float:left">
+							<li><strong style="color:chartreuse">Pros:</strong> fastest, can be personalized, least
+								computationally intensive</li>
+							<li><strong style="color:orange">Cons:</strong> poor classification of DMC and DMR networks
+						</ul>
+					</section>
 				</section>
 				
 				
@@ -531,7 +527,7 @@
 				</section>
 				
 				<section>
-					<h1>Questions or Comments?</h1>
+					<h1>Questions <br /> or  <br /> Comments?</h1>
 				</section>
 
 
