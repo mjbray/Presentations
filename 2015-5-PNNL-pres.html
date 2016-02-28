@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Evaluating the Accuracy and Efficiency of Complex Network Classification Algorithms</title>
+
+		<meta name="description" content="Presentation for PNNL Interview.">
+		<meta name="author" content="Margaret Bray">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal=ui">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/Solarized.css" id="theme">
+
+		<link rel="stylesheet" href="css/fullscreen-img.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+		
+		<style>
+			table, th, td {
+   			border: 1px solid black;
+    		border-collapse: collapse;
+				}
+			th, td {
+    		padding: 15px;
+				}
+		</style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Algorithmic Approaches to Biological Network Classification</h2>
+					
+					<br />
+					<p>Margaret Justice Bray</p>
+					<p><small>Department of Biostatistics and Bioinformatics<br />
+								Rollins School of Public Health<br />
+								Emory University<br />
+								Atlanta, GA 30322</small></p><br />
+					<p>May 7, 2015</p>
+				</section>
+
+				<section>
+					<h1>What is a Network?</h1><br />
+					<p> A diagrammatic representation of a system consisting of <strong style="color:Magenta">nodes (vertices)</strong> joined by <strong style="color:Magenta">links (edges)</strong>. Nodes represent system entitites and edges represent a particular type of interconnection between pairs of nodes (Estrada 2011).
+					</p>
+				</section>
+
+				<section>
+					<h1>Complex Networks </h1>
+					<p> Complex networks have nontrivial topological features that are not found in lattices or random graphs.</p>
+					<img src="2015-5-PNNL/Internet.png" alt="Internet" style="width:300px;height:250px"/>
+					<img src="2015-5-PNNL/NetworkSquareLattice.jpg" alt="Lattice" style="width:250px;height:250px"/>
+					<img src="2015-5-PNNL/RandomNetworks.jpg" alt="Random" style="width:300px;height:250px"/>
+				</section>
+
+				<section>
+					<section>
+						<h1>Empirical Networks</h1><br />
+						<p style="font-size: 1.5em">
+							A network formed through observation of any real-world phenomena.
+						</p>
+						</section>
+
+					<section>
+						<h2>Computer Networks</h2><br />
+						<ul>
+						<li>World Wide Web</li><br />
+						<li>Internet</li><br />
+						<li>Routers</li><br />
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Social and Public Health Netowkrs</h2><br />
+						<ul>
+						<li>Friendships</li><br />
+						<li>Sexual Relationships</li><br />
+						<li>Twitter Followings</li><br />
+						</ul>
+					</section>
+					
+					<section>
+						<h2>Biological and Molecular Networks</h2><br />
+						<ul>
+						<li>Food web</li><br />
+						<li>Metabolic</li><br />
+						<li><strong style="color:Cyan">Protein-protein interactions</strong></li><br />
+						<li>Neurological</li><br />
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<h1>Model Graphs</h1><br />
+					<p style="font-size: 1.25em" class="fragment" data-fragment-index="0">
+						A network <strong style="color:Magenta">not</strong> based directly on any real-world system,
+						though potentially motivated by one.</p><br />
+					<p style="font-size: 1.25em" class="fragment" data-fragment-index="1">
+						These are built by following a prescribed algorithm, also referred to
+						as a <strong style="color:Magenta">growth mechanism</strong>.</p><br />
+					<p style="font-size: 1.25em" class="fragment" data-fragment-index="2">
+						Model networks are either <strong style="color:Magenta">growing</strong> or <strong style="color:Magenta">static</strong>.</p>
+					
+					<aside class="notes">
+						Make sure to explain the difference between growing and static.
+					</aside>
+				</section>
+					
+				<section>
+					<h2>What does it Mean to Classify a Network?</h2><br />
+					<p> To determine which model graph most closely mimics the empirical network under investigation based upon some predefined set of features.
+					</p>
+				</section>
+
+				<section>
+					<h2>Why is network classification beneficial?</h2>
+					<ul>
+􏰀 						<li style="font-size: 1.25em">Increase understanding of the phenomena being modeled</li>
+􏰀 						<ul><li>Structure dictates functions</li></ul><br />
+						<li style="font-size: 1.25em">Predict missing interactions</li>
+􏰀	 					<li style="font-size: 1.25em">Guide future experiments</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Motivating Problem</h2><br />
+					<p style="font-size: 1.35em"> Find the most accurate classification algorithm for simple organism PPI networks.
+					</p>
+					<ul>
+􏰀 						<li style="font-size: 1.25em">Identify interactions that are missing in patients with protein diseases</li>
+􏰀 						<ul><li>Earlier diagnoses</li></ul><br />
+						<li style="font-size: 1.25em">Identify orthologous protein</li>
+						<ul><li>Explore evolutionary process</li>
+							<li>Determine PPI network for complex organisms</li></ul><br />
+					</ul>
+				</section>
+
+				<section>
+					<h2>Questions to Answer</h2><br />
+					<ul>
+􏰀 						<li style="font-size: 1.25em">Are the choices of model graphs appropriate?</li>
+						<li style="font-size: 1.25em">What methods exist for network classification?</li>
+􏰀	 					<li style="font-size: 1.25em">How do these methods perform?</li>
+						<ul><li>Accuracy? Runtime? Scaleability?</li></ul><br />
+					</ul>
+				</section>
+
+				<section>
+					<h1>Data</h1>
+				</section>
+
+				<section>
+					<h2>Protein-Protein Interaction (PPI) Network</h2><br />
+					<ul>
+􏰀 						<li style="font-size: 1.25em"><strong style="color:Magenta">Protein-Protein Interaction:</strong> "Physical contacts with molecular docking proteins that occur in a cell or in a living organism <i>in vivo</i>.'' (De Las Rivas 2010)</li><br />
+						<li style="font-size: 1.25em"><strong style="color:Magenta">PPI Network:</strong> A network formed using known protein-protein interactions. The proteins are nodes and interactions are edges.</li>
+					</ul>
+				</section>
+
+				<section>
+				<h2>Dataset</h2>
+				<h3><i>Saccharomyces cerevisiae</i> PPI Network</h3>
+				<ul style="float:left">
+					<li>High-throughput dataset acquired from DIP Database</li>
+􏰀 					<li>Created through tandem-affinity purification (TAP) and mass spectrometry
+						by Gavin et. al (2002)</li>
+􏰀 						<ul><li>High efficiency, sensitivity, and specificity</li></ul>
+􏰀 					<li>1361 proteins (nodes)</li>
+􏰀 					<li>3222 interactions (edges)</li>
+􏰀 					<li>No self-loops or lone nodes</li>
+				</ul>
+				</section>
+
+				<section fullscreen-img="2015-5-PNNL/sCerev.png" fullscreen-size="contain">
+			
+				</section>
+
+				<section>
+					<h2> Model Graphs</h2><br />
+					<table style="width:100%">
+						<tr class="fragment" data-fragment-index="1">
+						<td>Aging Vertex</td>
+						<td>AGV</td>
+						<td>Growing</td>
+						</tr>
+						<tr class="fragment" data-fragment-index="2">
+						<td>Duplication-Mutation</td>
+						<td>DMC</td>
+						<td>Growing</td>
+						</tr>
+						<tr class="fragment" data-fragment-index="2">
+						<td>-Complementation</td>
+						</tr>
+						<tr class="fragment" data-fragment-index="3">
+						<td>Duplication-Mutation with</td>
+						<td>DMR</td>
+						<td>Growing</td>
+						</tr>
+						<tr class="fragment" data-fragment-index="3">
+						<td> Random Mutation</td>
+						<tr class="fragment" data-fragment-index="4">
+						<td>3D Geometric</td>
+						<td>GEO</td>
+						<td>Static</td>
+						</tr>
+						<tr class="fragment" data-fragment-index="5">
+						<td>Linear Preferential Attachment</td>
+						<td>LPA</td>
+						<td>Growing</td>
+						</tr>
+						<tr class="fragment" data-fragment-index="6">
+						<td>Random Growing</td>
+						<td>RDG</td>
+						<td>Growing</td>
+						</tr>
+						<tr class="fragment" data-fragment-index="7">
+						<td>Random Static</td>
+						<td>RDS</td>
+						<td>Static</td>
+						</tr>
+						<tr class="fragment" data-fragment-index="8">
+						<td>Small-World</td>
+						<td>SMW</td>
+						<td>Static</td>
+						</tr>
+						<tr class="fragment" data-fragment-index="9">
+						<td>Stickiness Index</td>
+						<td>STICKY</td>
+						<td>Growing</td>
+						</tr>
+					</table>
+				</section>
+				
+				<section>
+					<h1>Are the choices of model graphs appropriate?</h1><br />
+					<!--ul>
+􏰀 						<li style="font-size: 1.25em">Is any model the clear best choice?</li><br />
+						<li style="font-size: 1.25em">Is any model obviously not?</li>
+					</ul>-->
+				</section>
+
+				<section>
+					<h2>Model Graph Simulations</h2>
+					<h3>Methods</h3>
+					<ul style="float:left">
+						<li>1000 networks of each type</li>
+	􏰀 						<ul><li>AGV, DMC, DMR, LPA, RDG, RDS, and SMW from Middendorf
+								(2005) source code</li>
+							<li>GEO and STICKY from GraphCrunch</li></ul>
+	􏰀 					<li>Required input values, i.e. number of nodes, edges, etc, based off
+							of <i>S. cerevisiae</i> PPI network values</li>
+	􏰀 					<li>Lone nodes were eliminated</li>
+	􏰀 						<ul><li>Consistent across literature</ul></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Graph Measures</h2>
+					<h3>Methods</h3>
+					<ul>
+􏰀 						<li style="font-size: 1.25em">18 measures considered</li><br />
+						<li style="font-size: 1.25em">4 categories of measures</li>
+						<ul><li>size, distance, centrality, connection</li></ul><br />
+						<li style="font-size: 1.25em">Median values calculated over 1000 model graphs of each type</li><br />
+						<li style="font-size: 1.25em">Values considered match if within $\pm 5\%$ of the empirical value</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Size Measures</h2>
+					<p>Results</p>
+					<img src="2015-5-PNNL/sizeParallelCoords.png" alt="sizeCoords" style="width:679px;height:525px"/>
+				</section>
+
+				<section>
+					<h2>Distance Measures</h2>
+					<p>Results</p>
+					<img src="2015-5-PNNL/distanceParallelCoords.png" alt="distanceCoords" style="width:679px;height:525px"/>
+				</section>
+
+				<section>
+					<h2>Centrality Measures</h2>
+					<p>Results</p>
+					<img src="2015-5-PNNL/centralityParallelCoords.png" alt="centralityCoords" style="width:679px;height:525px"/>
+				</section>
+
+				<section>
+					<h2>Connection Measures</h2>
+					<p>Results</p>
+					<img src="2015-5-PNNL/connectionParallelCoords.png" alt="connectionCoords" style="width:679px;height:525px"/>
+				</section>
+
+				<section>
+					<h2>Graph Matches Stratified by Measure Category</h2><br />
+					<ul>
+􏰀 						<li style="font-size: 1.25em">Size: 53%</li><br />
+						<li style="font-size: 1.25em">Distance: 22%</li><br />
+						<li style="font-size: 1.25em">Centrality: 19%</li><br />
+						<li style="font-size: 1.25em">Connection: 13%</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Conclusions</h2><br />
+					<ul>
+􏰀 						<li style="font-size: 1.25em">None of the model types are a perfect match</li><br />
+						<ul><li>AGV and LPA both matched 8 measures (44%)</li></ul><br />
+						<li style="font-size: 1.25em">May be necessary to prioritize measures for matching</li>
+					</ul>
+				</section>
+
+				<section>
+					<h1>What methods exist for network classification?</h1>
+				</section>
+
+				<section>
+					<h2>Classification Method Overview</h2><br />
+					<ul>
+					<listyle="font-size: 1.25em">Essentially infinite possibilities</li><br />
+					<li style="font-size: 1.25em">4 classification methods considered</li><br />
+					<li>Local properties</li>
+					<ul><li>Relative Graphlet Frequency (RGF)</li>
+					<li>Graphlet Degree Distribution (GDD)</li></ul><br />
+					<li>Global properties</li>
+					<ul><li>Characteristic Curve (CC)</li>
+					<li>Degree Distribution Distance (DDD)</li></ul>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Graphlets and Automorphism Orbits</h2>
+					<figure>
+						<img src="2014-11-Morocco-conf/graphlets_automorphism.png" alt="automorphism" style="width:841px;height:488px"/>
+						<figcaption style="font-size: 0.5em"><i>"Biological network comparison using graphlet degree distribution."</i> Natasa Przulj, <i>Bioinformatics</i>, 23(2):e177–83, Jan 2007., Fig. 1</figcaption>
+					</figure>
+				</section>
+				
+				
+				<section>
+				<h2>Relative Graphlet Frequency</h2>
+				<ol style="float:left">
+					<li class="fragment" data-fragment-index="1">Count graphlets</li>
+					<li class="fragment" data-fragment-index="2">Define distance:</li>
+				</ol>	
+				
+				<p style="font-size: 1.3em" class="fragment" data-fragment-index="2">
+					$\mathcal{D}_{\mathcal{RGF}}=\displaystyle\sum\limits_{i=1}^{29}\left|F_{i}(\mathcal{G}_{1})-F_{i}(\mathcal{G}_{2})\right|$</p>
+				<br />
+				<small><p class="fragment" data-fragment-index="3" style=line-height:2px>where</p></small>
+				<p class="fragment" data-fragment-index="3">
+					$F_{i}(\mathcal{G}) = -log(N_{i}(\mathcal{G})/T(\mathcal{G}))$</p>
+				<p class="fragment" data-fragment-index="3">
+					$N_{i}=$ number of graphlets of type $i$</p>
+				<p class="fragment" data-fragment-index="3">
+					$T(\mathcal{G})=$ total number of graphlets</p>
+				</section>
+				
+				<section>
+					<h2>Counting Automorphism Orbits</h2>
+					<img src="2015-5-PNNL/flower.png" alt="flower" style="width:178px;height:520px"/>
+					<table style="float:left">
+						<tr>
+							<td>$j$</td><td></td><td>$k$</td><td></td><td>$d_{\mathcal{G}}^{j}(k)$</td>
+						</tr>
+						<tr>
+						</tr>
+						<tr>
+							<td>0</td><td></td><td>1</td><td></td><td>1</td>
+						</tr>
+						<tr>
+							<td>0</td><td></td><td>2</td><td></td><td>2</td>
+						</tr>
+						<tr>
+							<td>0</td><td></td><td>3</td><td></td><td>1</td>
+						</tr>
+						<tr>
+							<td>1</td><td></td><td>1</td><td></td><td>2</td>
+						</tr>
+						<tr>
+							<td>1</td><td></td><td>2</td><td></td><td>1</td>
+						</tr>
+						<tr>
+							<td>2</td><td></td><td>2</td><td></td><td>1</td>
+						</tr>
+						<tr>
+							<td>3</td><td></td><td>1</td><td></td><td>3</td>
+						</tr>
+						<tr>
+							<td>9</td><td></td><td>1</td><td></td><td>1</td>
+						</tr>
+						<tr>
+							<td>10</td><td></td><td>1</td><td></td><td>2</td>
+						</tr>
+						<tr>
+							<td>11</td><td></td><td>1</td><td></td><td>1</td>
+						</tr>
+					</table>
+				</section>
+
+				<section>
+					<h2>Counting Automorphism Orbits</h2>
+					<img src="2015-5-PNNL/flower2.png" alt="flower2" style="width:178px;height:520px"/>
+					<table style="float:left">
+						<tr>
+							<td>$j$</td><td></td><td>$k$</td><td></td><td>$d_{\mathcal{G}}^{j}(k)$</td>
+						</tr>
+						<tr>
+						</tr>
+						<tr>
+						<tr>
+							<td>1</td><td></td><td>1</td><td></td><td>2</td>
+						</tr>
+					</table>
+				</section>
+
+				<section>
+					<h2>Counting Automorphism Orbits</h2>
+					<img src="2015-5-PNNL/flower3.png" alt="flower3" style="width:178px;height:520px"/>
+					<table style="float:left">
+						<tr>
+							<td>$j$</td><td></td><td>$k$</td><td></td><td>$d_{\mathcal{G}}^{j}(k)$</td>
+						</tr>
+						<tr>
+						</tr>
+						<tr>
+						<tr>
+							<td>1</td><td></td><td>2</td><td></td><td>1</td>
+						</tr>
+					</table>
+				</section>
+
+				<section>
+				<h2>Graphlet Degree Distribution</h2>
+				<ol style="float:left">
+					<li class="fragment" data-fragment-index="1">Count distribution of
+						each automorphism orbit</li>
+					<li class="fragment" data-fragment-index="2">Define agreement at a single
+						automorphism orbit, $j$,:</li>
+				</ol>
+				
+				<p style="font-size: 1.2em" class="fragment" data-fragment-index="2">
+					$A^{j}(\mathcal{G}_{1},\mathcal{G}_{2}) = 1 - \frac{1}{\sqrt{2}}\left(\sum\limits_{k=1}^{\infty}\left[N_{\mathcal{G}_{1}}^{j}(k)-N_{\mathcal{G}_{2}}^{j}(k)\right]^{2}\right)^{1/2}$</p>
+				<br />
+				<small><p class="fragment" data-fragment-index="3" style=line-height:2px>where</p></small>
+				<p class="fragment" data-fragment-index="3">
+					$N_{\mathcal{G}}^{j}(k) = \frac{S_{\mathcal{G}}^{j}(k)}{T_{\mathcal{G}}^{j}}$</p>
+				<p class="fragment" data-fragment-index="3">
+					$S_{\mathcal{G}}^{j}(k)=$ number of nodes with automorphism orbit degree $k$, scaled by $k$</p>
+				<p class="fragment" data-fragment-index="3">
+					$T_{\mathcal{G}}^{j}=$ total number of automorphism orbit $j$</p>
+				</section>
+				
+				<section>
+				<h2>Graphlet Degree Distribution cont.</h2>
+				<p style="float:left" class="fragment" data-fragment-index="1">Arithmetic Mean:</li>
+				</p>
+				<p style="font-size: 1.3em" class="fragment" data-fragment-index="1">
+					$A_{arith}(\mathcal{G}_{1},\mathcal{G}_{2}) = \frac{1}{73}\sum\limits_{j=0}^{72}A^{j}(\mathcal{G}_{1},\mathcal{G}_{2})$</p>	
+				<br />
+				
+				<p style="float:left" class="fragment" data-fragment-index="2">Geometric Mean:</li>
+				</p>
+				<p style="font-size: 1.3em" class="fragment" data-fragment-index="2">
+					$A_{geo}(\mathcal{G}_{1},\mathcal{G}_{2}) = \left(\frac{1}{73}\prod\limits_{j=0}^{72}A^{j}(\mathcal{G}_{1},\mathcal{G}_{2})\right)^{1/73}$</p>
+				</section>
+				
+				<section>
+					<h2>GraphCrunch</h2><br />
+					<ul>
+􏰀 						<li style="font-size: 1.25em">RGF and GDD both run in GraphCrunch</li><br />
+						<li style="font-size: 1.25em">Software tool for network modeling, alignment, clustering</li><br />
+						<li style="font-size: 1.25em">Created by researchers at Imperial College London</li>
+						<ul><li>Oleksii Kuchaiev, Aleksandar Stevanovic, Wayne Hayes, Natasa Przulj</li></ul><br />
+						<li style="font-size: 1.25em">Version 2.1 utilized</li>
+					</ul>
+				</section>
+
+				<section>
+				<h2>Characteristic Curve</h2>
+					<figure>
+						<img src="2014-11-Morocco-conf/CC.png" alt="DDD" style="width:473px;height:451px"/>
+						<img src="2014-11-Morocco-conf/CCgraph.png" alt="DDD" style="width:254px;height:231px"/>
+						<figcaption style="font-size: 0.5em"><i>"A Curve Shaped Description of Large Networks, with an Application to the Evaluation of Network Models"</i> <br /> Xianchuang Su et al., <i>PLoS ONE</i>, 6(5):e19784, May 2011., Fig. 1</figcaption>
+					</figure>
+				</section>
+				
+				<section>
+				<h2>Degree Distribution Distance</h2>
+				<ol style="float:left">
+					<li class="fragment" data-fragment-index="1">Calculate degree distribution</li>
+					<li class="fragment" data-fragment-index="2">Define distance:</li>
+				</ol>	
+				
+				<p style="font-size: 1.3em" class="fragment" data-fragment-index="2">
+					$\mathcal{D_{G}(G}_{1},\mathcal{G}_{2})=\displaystyle\sum\limits_{k=k_{1}}^{k_{2}}\left|F_{k}(\mathcal{G}_{1})-F_{k}(\mathcal{G}_{2})\right|$</p>
+				<br />
+				<small><p class="fragment" data-fragment-index="3" style=line-height:2px>where</p></small>
+				<p class="fragment" data-fragment-index="3">
+					$F_{k}(\mathcal{G}) = -log(N_{k}(\mathcal{G})/S(\mathcal{G}))$</p>
+				<p class="fragment" data-fragment-index="3">
+					$S(\mathcal{G})=$ total number of nodes</p>
+				<p class="fragment" data-fragment-index="3">
+					$N_{k}(\mathcal{G})=$ number of nodes with degree $k$</p>
+				<p class="fragment" data-fragment-index="4">
+					$k_{1}$ ($k_{2}$) = min (max) degree of networks</p>
+				</section>
+				
+				<section>
+					<h2>Issues Identified in Prior Work</h2>
+					<ul>
+􏰀 						<li style="font-size: 1.25em">Type of model graphs</li><br />
+						<li style="font-size: 1.25em">Sampling sizes</li><br />
+						<li style="font-size: 1.25em">Large or small-scale categorization limitations</li>
+					</ul>
+				</section>
+
+				<section>
+				<h2>Classification Algorithm Validation</h2>
+						<img src="2014-11-Morocco-conf/rdmGraph1.png" alt="GDDG" style="width:872px;height:432px"/>
+				</section>
+				
+				<section>
+					<h2>Classification Algorithm Validation cont.</h2>
+					<ul>
+						<img src="2014-11-Morocco-conf/rdmGraph.png" alt="GDDG" style="width:963px;height:336px"/>
+				</section>
+				
+				<section>
+					<h2>Evaluation</h2>
+					<ul>
+􏰀 						<li style="font-size: 1.25em">Accuracy<li><br />
+						<li style="font-size: 1.25em">F-measures</li><br />
+						<ul><li>F-macro</li>
+						<li>F-micro</li></ul><br />
+						<li style="font-size: 1.25em">Sensitivity</li><br />
+						<li style="font-size: 1.25em">Specificity</li><br />
+						<li style="font-size: 1.25em">PPV</li><br />
+						<li style="font-size: 1.25em">NPV</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Results</h2>
+					<h3>Perfect Matching Matrix</h3>
+					<img src="2014-11-Morocco-conf/PERFECTconfusionMatrix.png" alt="Graphlets" style="width:500px;height:500px"/>
+				</section>
+				<section>
+					<section>
+						<h2>Matching Matrices</h2>
+						<a href="#/DDmatch">
+							<img src="2014-11-Morocco-conf/DDDconfusionMatrix.png" alt="DDD" style="width:250px;height:250px"/></a>
+						<a href="#/CCmatch">
+							<img src="2014-11-Morocco-conf/CCconfusionMatrix.png" alt="CCC" style="width:250px;height:250px"/></a>
+						<a href="#/RGFmatch">
+							<img src="2014-11-Morocco-conf/RGFconfusionMatrix.png" alt="RGF" style="width:250px;height:250px"/></a>
+						<a href="#/GDDAmatch">
+							<img src="2014-11-Morocco-conf/GDDAconfusionMatrix.png" alt="GDDA" style="width:250px;height:250px"/></a>
+						<a href="#/GDDGmatch">
+						<img src="2014-11-Morocco-conf/GDDGconfusionMatrix.png" alt="GDDG" style="width:250px;height:250px"/></a>
+					</section>
+				
+					<section id="DDmatch">
+						<h2>DDD Matching Matrix</h2>
+						<img src="2014-11-Morocco-conf/DDDconfusionMatrix.png" alt="Graphlets" style="width:600px;height:600px"/>
+					</section>
+				
+					<section id="CCmatch">
+						<h2>CCC Matching Matrix</h2>
+						<img src="2014-11-Morocco-conf/CCconfusionMatrix.png" alt="Graphlets" style="width:600px;height:600px"/>
+					</section>
+				
+					<section id="RGFmatch">
+						<h2>RGF Matching Matrix</h2>
+						<img src="2014-11-Morocco-conf/RGFconfusionMatrix.png" alt="Graphlets" style="width:600px;height:600px"/>
+					</section>
+				
+					<section id="GDDAmatch">
+						<h2>GDD <small>(Arithmetic Mean)</small> Matching Matrix</h2>
+						<img src="2014-11-Morocco-conf/GDDAconfusionMatrix.png" alt="Graphlets" style="width:600px;height:600px"/>
+					</section>
+				
+					<section id="GDDGmatch">
+						<h2>GDD <small>(Geometric Mean)</small> Matching Matrix</h2>
+						<img src="2014-11-Morocco-conf/GDDGconfusionMatrix.png" alt="Graphlets" style="width:600px;height:600px"/>
+					</section>
+				</section>
+				
+				<section>
+					<h2>Classification Algorithm Validation cont.</h2>
+					<ul>
+						<img src="2015-5-PNNL/ALLsensPerf.png" alt="ALLsensPerf" style="width:963px;height:336px"/>
+				</section>
+
+				<section>
+					<section>
+						<h2>% Correctly Classified</h2>
+						<ul style="float:left">
+							<li>Degree Distribution Distance: <strong style="color:orange">45%</strong></li><br />
+							<li>Characteristic Curve: <strong>58%</strong></li><br />
+							<li>Relative Graphlet Frequency: <strong>57%</strong></li><br />
+							<li>Graphlet Degree Distribution (Arithmetic): <strong style="color:green">68%</strong></li><br />
+							<li>Graphlet Degree Distribution (Geometric): <strong>60%</strong></li><br />
+						</ul>
+					</section>
+				
+					<section>
+						<h2>Method Pros and Cons</h2>
+						<p> <strong>Degree Distribution Distance</strong> </p>
+						<ul style="float:left">
+							<li><strong style="color:green">Pros:</strong>
+								second fastest, no network size limits</li>
+							<li><strong style="color:orange">Cons:</strong>
+								worst method validation results, outcomes not normalized</li><br />
+						</ul>
+					
+						<p> <strong>Characteristic Curve</strong> </p>
+						<ul style="float:left">
+							<li><strong style="color:green">Cons:</strong>
+								slow, computationally intensive, outcomes not normalized, requires
+								connected network, results dependent on starting node</li><br />
+						</ul>
+					
+						<p> <strong>Relative Graphlet Frequency</strong> </p>
+						<ul style="float:left">
+							<li><strong style="color:green">Pros:</strong> medium speed</li>
+							<li><strong style="color:orange">Cons:</strong> upper limit of 50,000 edges, outcomes
+								not normalized</li>
+						</ul>
+					</section>
+				
+					<section>
+						<h2>Method Pros and Cons cont.</h2>	
+						<p> <strong>Graphlet Degree Distribution</strong> </p>
+						<ul style="float:left">
+							<li><strong style="color:green">Pros:</strong> normalized outcomes</li>
+							<li><strong style="color:orange">Cons:</strong> upper limit of 50,000 edges, extremely slow,
+								very computationally intensive
+								</li><br />
+						</ul>
+					
+						<p style="float:center"><strong>Cross Scoring</strong> </p>
+						<ul style="float:left">
+							<li><strong style="color:green">Pros:</strong> fastest, can be personalized, least
+								computationally intensive</li>
+							<li><strong style="color:orange">Cons:</strong> poor classification of DMC and DMR networks
+						</ul>
+					</section>
+				</section>
+				
+				
+				<section>
+					<h2>Conclusions</h2>
+					<ul style="float:left">
+					<li class="fragment">
+						Overall poor classification</li><br />
+					<li class="fragment">
+						Lots of potential</li><br />
+					<li class="fragment">
+						Difficult time classifying DMC and DMR</li><br />
+						<ul><li class="fragment">Find identifying features </li></ul>
+				</ul>
+				</section>
+				
+				<section>
+					<h1>Questions <br /> or  <br /> Comments?</h1>
+				</section>
+
+
+
+
+				
+				
+				
+				
+				
+				
+				<section>
+					<h1>Questions to Answer</h1><br />
+					<p> 
+					</p>
+				</section>
+
+				<section>
+					<h1>Questions to Answer</h1><br />
+					<p> 
+					</p>
+				</section>
+
+				<section>
+					<h1>Questions to Answer</h1><br />
+					<p> 
+					</p>
+				</section>
+
+				<section>
+					<h1>Questions to Answer</h1><br />
+					<p> 
+					</p>
+				</section>
+
+				<section>
+					<h1>Questions to Answer</h1><br />
+					<p> 
+					</p>
+				</section>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+ 
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: false,
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+				math: {
+    				mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+    				config: 'TeX-AMS_HTML-full' // See http://docs.mathjax.org/en/latest/config-files.html
+  				},
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+				// Optional libraries used to extend on reveal.js
+				   dependencies: [
+        // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+        { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+        // Interpret Markdown in <section> elements
+        { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        // Syntax highlight for <code> elements
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        // Zoom in and out with Alt+click
+        { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+        // Speaker notes
+        { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+        // Syntax highlight for <code> elements
+        //{ src: 'lib/js/fullscreen-img.js' },
+        // Remote control your reveal.js presentation using a touch device UNCOMMENT BELOW LINE TO CONTROL WITH MY PHONE
+	//{ src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } },
+        // MathJax
+        { src: 'plugin/math/math.js', async: true }
+    ]
+			});
+		</script>
+
+	</body>
+</html>
